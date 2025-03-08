@@ -13,3 +13,4 @@ g++ -std=c++20 ./src/*.cpp ./thirdpartysrc/*.cpp                                
     -lSDL2 -ldl
 
 sh run.sh
+# repository
