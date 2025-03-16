@@ -146,12 +146,6 @@ int main() {
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, &projection[0][0]);
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
-        /* ---==========================================================================--- */
-        // REFACTOR :: Cull Unused 3D Primitives & Incorporate Null Texture Loading... How? //
-        /* ---==========================================================================--- */
-
-
-
         // /* ---================--- */
         // // CAMERA 1.7. :: LOGIC 1 //
         // /* ---================--- */
