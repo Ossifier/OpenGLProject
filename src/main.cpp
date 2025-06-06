@@ -33,18 +33,20 @@
 const unsigned int SCR_WIDTH = 1600;
 const unsigned int SCR_HEIGHT = 1024;
 
+float currentFrame = 0.0f;
+
 // Create a single global camera.
 Camera gCamera;
 bool gQuit = false;
 
-void ProcessInput() {
+void ProcessInput(float deltaTime) {
     SDL_Event e;
     const Uint8 *state = SDL_GetKeyboardState(NULL);
 
     static int mouseX = SCR_WIDTH/2;
     static int mouseY = SCR_HEIGHT/2;
 
-    float speed = 0.02f;
+    float speed = 0.01f * deltaTime;
 
     while(SDL_PollEvent(&e) != 0) {
         if(e.type == SDL_QUIT || state[SDL_SCANCODE_ESCAPE]) {
@@ -183,7 +185,14 @@ int main() {
 
         Uint64 start = SDL_GetPerformanceCounter();
 
-        ProcessInput();
+        float currentFrame = SDL_GetTicks64();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+
+        std::cout << "deltaTime: " << deltaTime << std::endl;
+
+
+        ProcessInput(deltaTime);
 
         gApp.PollQuit();
         gApp.PollToggleWireframe();
