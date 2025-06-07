@@ -16,7 +16,6 @@ class App{
         // Member Functions -- Handling Unputs [[[REFACTOR -- Consider Enums?]]]
         void PollQuit();
         void PollToggleWireframe();
-
         void GetFPS(Uint64 start);
 
         int mScreenWidth;

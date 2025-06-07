@@ -189,7 +189,7 @@ int main() {
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
-        std::cout << "deltaTime: " << deltaTime << std::endl;
+        // std::cout << "deltaTime: " << deltaTime << std::endl;
 
 
         ProcessInput(deltaTime);
