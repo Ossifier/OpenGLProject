@@ -112,9 +112,6 @@ float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 int main() {
-    // const unsigned int SCR_WIDTH = 1024;
-    // const unsigned int SCR_HEIGHT = 768;
-
     App gApp(false, false, false);
     gApp.CreateWindow(SCR_WIDTH, SCR_HEIGHT, 0, 0);
 
@@ -144,8 +141,6 @@ int main() {
     mVertexSpecMesh3DPrimitive(&Quad);
     mVertexSpecMesh3DPrimitive(&Pyramid);
     mVertexSpecMesh3DPrimitive(&Cube);
-
-
 
     glm::vec3 cubePositions[] = {
         glm::vec3( 0.0f,  0.0f,  0.0f  ),
@@ -357,9 +352,6 @@ int main() {
         // Update Window
         SDL_GL_SwapWindow(gApp.mGraphicsApplicationWindow);
 
-        // Uint64 end = SDL_GetPerformanceCounter();
-        // float elapsed = (end - start) / (float)SDL_GetPerformanceFrequency();
-        // std::cout << "Current FPS: " << std::to_string(1.0f / elapsed) << std::endl;
         // gApp.GetFPS(start);
     }
 
