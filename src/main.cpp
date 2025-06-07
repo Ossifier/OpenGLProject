@@ -101,8 +101,6 @@ void ProcessInput(float deltaTime) {
     if (state[SDL_SCANCODE_LEFT]) {
         gCamera.mLookLeft(speed);
     }
-
-
 }
 
 // CAMERA IMPLEMENTATION TO DO:
