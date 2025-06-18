@@ -1,12 +1,15 @@
 // Include Self-Authored Libraries
 #include "App.hpp"
 #include "Camera.hpp"
-#include "DrawLib.hpp"
 #include "Shader.hpp"
 #include "Texture2D.hpp"
 
 // Include Mesh3D Primitive Library (Includes Draw Functions)
 #include "Mesh3DPrimitive.hpp"
+
+// Include Self-Authored Libraries
+#include "DrawLib.hpp"
+#include "AnimateLib.hpp"
 
 // Include C++ Std Libraries
 #include <iostream>
@@ -284,7 +287,10 @@ int main() {
         containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
 
         model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -3.0f));         
-        model = glm::rotate(model, time * 1, glm::vec3(0.0f, 1.0f, 0.0f));            
+
+        // model = mSpinStatic(model, time, 4.0f);
+        // model = mBobStatic(model, time, 10.0f);
+        model = mWobbleStatic(model, time, 0.1f, 50.0f);
 
         // glUseProgram(myShader.mShaderProgram);
         glBindVertexArray(Triangle.mVAO);
