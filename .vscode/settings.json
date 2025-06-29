@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "iostream": "cpp",
-        "ostream": "cpp",
-        "cmath": "cpp"
-    },
-    "cmake.sourceDirectory": "/home/x00terb00ter/Desktop/CodingTutorials/OpenGL/Learn OpenGL/1.6. Coordinate Systems/1.6. Coordinate Systems (3D Cube) (REFACTOR NEW)/thirdpartyinclude/glm-master",
-    "cmake.ignoreCMakeListsMissing": true
-}
