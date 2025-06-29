@@ -24,7 +24,7 @@ glm::mat4 Camera::mGetViewMatrix() const{
     return glm::lookAt(mPosition, mPosition + mViewDirection, mUpVector);
 }
 
-void Camera::MouseLook(int mouseX, int mouseY) {
+void Camera::mMouseLook(int mouseX, int mouseY) {
     glm::vec2 currentMouse = glm::vec2(mouseX, mouseY);
     static bool firstLook = true;
     if(firstLook){
@@ -46,19 +46,87 @@ void Camera::MouseLook(int mouseX, int mouseY) {
 }
 
 // Debugging Functions
-void Camera::PrintDirection() {
+void Camera::mPrintDirection() {
     std::cout << "mViewDirection: " << 
         mViewDirection.x << ", " << 
         mViewDirection.y << ", " << 
         mViewDirection.z << ", " << std::endl; 
 }
 
-void Camera::PrintStrafeDirection() {
+void Camera::mPrintStrafeDirection() {
     std::cout << "mStrafeDirection: " << 
         mStrafeDirection.x << ", " << 
         mStrafeDirection.y << ", " << 
         mStrafeDirection.z << ", " << std::endl; 
 }
+
+
+void Camera::mPollControlInputs(GLuint SCR_WIDTH, GLuint SCR_HEIGHT, GLfloat deltaTime) {
+
+    SDL_Event e;
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+
+    static int mouseX = SCR_WIDTH/2;
+    static int mouseY = SCR_HEIGHT/2;
+
+    float speed = 0.01f * deltaTime;
+
+    while(SDL_PollEvent(&e) != 0) {
+        if(e.type == SDL_MOUSEMOTION) {
+            mouseX -= e.motion.xrel;
+            mouseY -= e.motion.yrel;
+            mMouseLook(mouseX, mouseY);
+        }
+    }
+
+    // Print Dirs
+    if (state[SDL_SCANCODE_P]) {
+        mPrintDirection();
+    }
+    if (state[SDL_SCANCODE_L]) {
+        mPrintStrafeDirection();
+    }
+
+    // Handle Camera Movements (WASD-RF)
+    if (state[SDL_SCANCODE_W]) {
+        mMoveForward(speed);
+    }
+    if (state[SDL_SCANCODE_S]) {
+        mMoveBackward(speed);
+    }
+    if (state[SDL_SCANCODE_A]) {
+        mMoveLeft(speed);
+    }
+    if (state[SDL_SCANCODE_D]) {
+        mMoveRight(speed);
+    }
+    if (state[SDL_SCANCODE_R]) {
+        mMoveUp(speed);
+    }
+    if (state[SDL_SCANCODE_F]) {
+        mMoveDown(speed);
+    }
+
+    // Handle Keyboard Look (Left, Right, Up Down)
+    if (state[SDL_SCANCODE_UP]) {
+        mLookUp(speed);
+    }
+    if (state[SDL_SCANCODE_DOWN]) {
+        mLookDown(speed);
+    }
+        if (state[SDL_SCANCODE_RIGHT]) {
+        mLookRight(speed);
+    }
+    if (state[SDL_SCANCODE_LEFT]) {
+        mLookLeft(speed);
+    }
+}
+
+
+
+
+
+
 
 // WASD Functions
 void Camera::mMoveForward(float speed) {
@@ -108,25 +176,3 @@ void Camera::mLookLeft(float speed) {
 void Camera::mLookRight(float speed) {
     mViewDirection = glm::rotateY(mViewDirection, glm::radians(-0.5f));
 }
-
-
-    //////////...
-    /////...
-    //... DEPRICATED LOOK FUNCTION APPROACH -- PERHAPS APPROPRIATE FOR FLY-BY CAMERA?
-    /////...
-    //////////...
-
-
-// // Manual Look Functions
-// void Camera::mLookUp(float speed) {
-//     mViewDirection = glm::rotateX(mViewDirection, glm::radians(0.5f));
-// }
-// void Camera::mLookDown(float speed) {
-//     mViewDirection = glm::rotateX(mViewDirection, glm::radians(-0.5f));
-// }
-// void Camera::mLookLeft(float speed) {
-//     mViewDirection = glm::rotateY(mViewDirection, glm::radians(0.5f));
-// }
-// void Camera::mLookRight(float speed) {
-//     mViewDirection = glm::rotateY(mViewDirection, glm::radians(-0.5f));
-// }

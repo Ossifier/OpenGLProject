@@ -6,20 +6,23 @@
 // Include OpenGL Libs For Inputs
 #include <glad/glad.h>
 
+#include "Camera.hpp"
+
 class App{
     public:
         App(bool DebugSubsystems, bool DebugWindowCreation, bool QueryGPU);
         ~App();
 
-        void CreateWindow(int width, int height, int xPos, int yPos);
+        void CreateWindow(GLint width, GLint height, GLint xPos, GLint yPos);
 
         // Member Functions -- Handling Unputs [[[REFACTOR -- Consider Enums?]]]
-        void PollQuit();
-        void PollToggleWireframe();
-        void GetFPS(Uint64 start);
+        void mPollQuit();
+        void mPollToggleWireframe();
 
-        int mScreenWidth;
-        int mScreenHeight;
+        void mGetFPS(Uint64 start);
+
+        GLint mScreenWidth;
+        GLint mScreenHeight;
         SDL_Window* mGraphicsApplicationWindow  = nullptr;
 
         // Runtime Operation Flags
@@ -33,15 +36,15 @@ class App{
         bool mDebugWindowCreation               = false; // If true, we return print statements for launching the App.
         bool mQueryGPU                          = false; // If true, we return print statements for returning GPU vendor info.
 
-        float mCurrentFrameTime                 = 0;
-        float mLastFrameTime                    = 0;
-        float mDeltaTime                        = 0;
+        GLfloat mCurrentFrameTime                 = 0;
+        GLfloat mLastFrameTime                    = 0;
+        GLfloat mDeltaTime                        = 0;
 
-        void QuitOnError();
+        void mQuitOnError();
 
-        void RetrieveGPUQuery();
-        void RetrieveSDLSubsystemChecks();
-        void RetrieveSDLWindowCreationChecks();
+        void mRetrieveGPUQuery();
+        void mRetrieveSDLSubsystemChecks();
+        void mRetrieveSDLWindowCreationChecks();
 };
 
 #endif

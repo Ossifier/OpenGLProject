@@ -11,7 +11,7 @@ App::App(bool DebugSubsystems, bool DebugWindowCreation, bool QueryGPU) {
     mDebugWindowCreation = DebugWindowCreation;
     mQueryGPU = QueryGPU;
 
-    RetrieveSDLSubsystemChecks();
+    mRetrieveSDLSubsystemChecks();
 
     // Set OpenGL Context Attributes
     // -----------------------------
@@ -30,7 +30,7 @@ App::~App() {
 }
 
 // Create Window & OpenGL Context
-void App::CreateWindow(int width, int height, int xPos, int yPos) {
+void App::CreateWindow(GLint width, GLint height, GLint xPos, GLint yPos) {
     // Build Window and Set OpenGL Context
     // -----------------------------------
     mGraphicsApplicationWindow  = SDL_CreateWindow(
@@ -40,28 +40,26 @@ void App::CreateWindow(int width, int height, int xPos, int yPos) {
         SDL_WINDOW_OPENGL);
     mOpenGLContext              = SDL_GL_CreateContext(mGraphicsApplicationWindow);
 
-    RetrieveSDLWindowCreationChecks();
-    QuitOnError();
+    mRetrieveSDLWindowCreationChecks();
+    mQuitOnError();
 
-    RetrieveGPUQuery();
+    mRetrieveGPUQuery();
 }
 
 
 /* ---========--- */
 // PUBLIC METHODS //
 /* ---========--- */
-void App::PollQuit() {
+void App::mPollQuit() {
     SDL_Event e;
     const Uint8 *state = SDL_GetKeyboardState(NULL);
-    while(SDL_PollEvent(&e) != 0) {
-        if(e.type == SDL_QUIT || state[SDL_SCANCODE_ESCAPE]) {
-            std::cout << "Application Process Terminated...\n" << std::endl;
-            mQuit = true;
-        }
+    if(e.type == SDL_QUIT || state[SDL_SCANCODE_ESCAPE]) {
+        std::cout << "Application Process Terminated..." << std::endl;
+        mQuit = true;
     }
 }
 
-void App::PollToggleWireframe() {
+void App::mPollToggleWireframe() {
     SDL_Event e;
     const Uint8 *state = SDL_GetKeyboardState(NULL);
     if (mWireFrameMode && state[SDL_SCANCODE_1]) {
@@ -73,7 +71,7 @@ void App::PollToggleWireframe() {
     }
 }
 
-void App::GetFPS(Uint64 startTime) {
+void App::mGetFPS(Uint64 startTime) {
     Uint64 endTime = SDL_GetPerformanceCounter();
     float elapsedTime = (endTime - startTime) / (float)SDL_GetPerformanceFrequency();
     std::cout << "Current FPS: " << std::to_string(1.0f / elapsedTime) << std::endl;
@@ -82,7 +80,7 @@ void App::GetFPS(Uint64 startTime) {
 /* ---=========--- */
 // PRIVATE METHODS //
 /* ---=========--- */
-void App::QuitOnError() {
+void App::mQuitOnError() {
     // App Window Creating FailureVertex
     if (mGraphicsApplicationWindow == nullptr) {exit(1);}
     // OpenGL Context Failure
@@ -91,15 +89,15 @@ void App::QuitOnError() {
     if(!gladLoadGLLoader(SDL_GL_GetProcAddress)) {exit(1);}
 }
 
-void App::RetrieveGPUQuery() {
+void App::mRetrieveGPUQuery() {
     if (mQueryGPU) {
         std::cout << "\nVendor: " << glGetString(GL_VENDOR) << std::endl;
         std::cout << "Renderer: " << glGetString(GL_RENDERER) << std::endl;
         std::cout << "Version: " << glGetString(GL_VERSION) << std::endl;
         std::cout << "Shading Language: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << "\n" << std::endl;
 
-        int nrVertexAttributes;
-        int nrFragmentAttributes;
+        GLint nrVertexAttributes;
+        GLint nrFragmentAttributes;
         glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrVertexAttributes);
         glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &nrFragmentAttributes);
 
@@ -108,7 +106,7 @@ void App::RetrieveGPUQuery() {
     }
 }
 
-void App::RetrieveSDLSubsystemChecks() {
+void App::mRetrieveSDLSubsystemChecks() {
     if (mDebugSubsystems) {
         if (SDL_Init(SDL_INIT_VIDEO) < 0) {
             std::cout << "SDL2 could not initialize video subsystem..." << std::endl;
@@ -140,7 +138,7 @@ void App::RetrieveSDLSubsystemChecks() {
     }
 }
 
-void App::RetrieveSDLWindowCreationChecks() {
+void App::mRetrieveSDLWindowCreationChecks() {
     if (mDebugWindowCreation) {
         // Check for Errors
         if (mGraphicsApplicationWindow == nullptr) {

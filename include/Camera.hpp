@@ -1,7 +1,11 @@
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 
+#include <SDL2/SDL.h>
+#include <glad/glad.h>
+
 #include "glm/glm.hpp"
+
 
 enum movState { MOV_FORWARD, MOV_BACK, MOV_LEFT, MOV_RIGHT };
 
@@ -12,11 +16,14 @@ class Camera {
         Camera();
 
         glm::mat4 mGetViewMatrix() const;
-        void MouseLook(int mouseX, int mouseY);
+        void mMouseLook(int mouseX, int mouseY);
 
         // Debugging Functions
-        void PrintDirection();
-        void PrintStrafeDirection();
+        void mPrintDirection();
+        void mPrintStrafeDirection();
+
+        // Control Handler
+        void mPollControlInputs(GLuint SCR_WIDTH, GLuint SCR_HEIGHT, GLfloat deltaTime);
 
         // WASD Movement (Free Camera)
         void mMoveForward(float speed);
