@@ -288,9 +288,9 @@ int main() {
 
         model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -3.0f));         
 
-        model = mSpinStatic(model, time, 1.0f);
-        model = mBobStatic(model, time, 2.0f);
-        model = mWobbleStatic(model, time, 0.1f, 5.0f);
+        model = mSpinContinuous(model, time, 1.0f);
+        model = mBobContinuous(model, time, 2.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 5.0f);
 
         // glUseProgram(myShader.mShaderProgram);
         glBindVertexArray(Triangle.mVAO);
@@ -307,9 +307,9 @@ int main() {
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -3.0f));
         
-        model = mSpinStatic(model, time, 2.0f);
-        model = mBobStatic(model, time, 4.0f);
-        model = mWobbleStatic(model, time, 0.1f, 7.5f);
+        model = mSpinContinuous(model, time, 2.0f);
+        model = mBobContinuous(model, time, 4.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 7.5f);
 
         // glUseProgram(myShader.mShaderProgram);
         glBindVertexArray(Quad.mVAO);
@@ -326,9 +326,9 @@ int main() {
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(1.0, 0.0f, -3.0f)); 
 
-        model = mSpinStatic(model, time, 3.0f);
-        model = mBobStatic(model, time, 6.0f);
-        model = mWobbleStatic(model, time, 0.1f, 10.0f);
+        model = mSpinContinuous(model, time, 3.0f);
+        model = mBobContinuous(model, time, 6.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 10.0f);
         
         // glUseProgram(myShader.mShaderProgram);
         glBindVertexArray(Pyramid.mVAO);       
@@ -345,9 +345,9 @@ int main() {
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(3.0f, 0.0f, -3.0f)); 
 
-        model = mSpinStatic(model, time, 4.0f);
-        model = mBobStatic(model, time, 8.0f);
-        model = mWobbleStatic(model, time, 0.1f, 12.5f);
+        model = mSpinContinuous(model, time, 4.0f);
+        model = mBobContinuous(model, time, 8.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 12.5f);
 
         // glUseProgram(myShader.mShaderProgram);
         glBindVertexArray(Cube.mVAO);
