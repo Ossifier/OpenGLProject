@@ -369,7 +369,7 @@ std::vector<GLfloat> Mesh3DPrimitive::mPopulateAdditionalVertexData(
 };
 
 void Mesh3DPrimitive::mPrintVertexData() {
-    std::cout << "\nFULL VERTEX DATA: " << std::endl;
+    std::cout << "\nFULL VERTEX DATA: " << "\n";
     for (int i = 0; i < mVertices.size(); i++) {
         std::cout << mVertices[i] << ", ";
         if ((i + 1) % (mFullVertStride) == 0) { std::cout << "\n"; }
@@ -379,7 +379,7 @@ void Mesh3DPrimitive::mPrintVertexData() {
 };
 
 void Mesh3DPrimitive::mPrintIndexData() {
-    std::cout << "\nFULL INDEX DATA: " << std::endl;
+    std::cout << "\nFULL INDEX DATA: " << "\n";
     for (int i = 0; i < mIndices.size(); i++) {
         std::cout << mIndices[i] << ", ";
         if ((i + 1) % (3) == 0) { std::cout << "\n"; }

@@ -91,9 +91,9 @@ void App::mQuitOnError() {
 
 void App::mRetrieveGPUQuery() {
     if (mQueryGPU) {
-        std::cout << "\nVendor: " << glGetString(GL_VENDOR) << std::endl;
-        std::cout << "Renderer: " << glGetString(GL_RENDERER) << std::endl;
-        std::cout << "Version: " << glGetString(GL_VERSION) << std::endl;
+        std::cout << "\nVendor: " << glGetString(GL_VENDOR) << "\n";
+        std::cout << "Renderer: " << glGetString(GL_RENDERER) << "\n";
+        std::cout << "Version: " << glGetString(GL_VERSION) << "\n";
         std::cout << "Shading Language: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << "\n" << std::endl;
 
         GLint nrVertexAttributes;
@@ -101,7 +101,7 @@ void App::mRetrieveGPUQuery() {
         glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrVertexAttributes);
         glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &nrFragmentAttributes);
 
-        std::cout << "Maximum # of Vertex Attributes Supported: " << nrVertexAttributes << std::endl;
+        std::cout << "Maximum # of Vertex Attributes Supported: " << nrVertexAttributes << "\n";
         std::cout << "Maximum # of Active Texture Image Units Supported: " << nrVertexAttributes << "\n" << std::endl;
     }
 }

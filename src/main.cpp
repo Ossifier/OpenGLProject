@@ -1,6 +1,5 @@
 // Include Self-Authored Libraries
 #include "App.hpp"
-#include "Camera.hpp"
 #include "Shader.hpp"
 #include "Texture2D.hpp"
 
@@ -25,7 +24,11 @@
 
 
 
-
+////////...
+////...
+// WINDOW & CAMERA SETUP -- Consider moving to a Settings Manager.
+////...
+////////...
 
 Camera gCamera;
 
@@ -40,7 +43,7 @@ GLfloat gCurrentFrame = 0.0f;
 
 
 int main() {
-    App gApp(false, false, false);
+    App gApp(true, true, true);
     gApp.CreateWindow(SCR_WIDTH, SCR_HEIGHT, 0, 0);
 
     SDL_WarpMouseInWindow(gApp.mGraphicsApplicationWindow, SCR_WIDTH/2, SCR_HEIGHT/2);
@@ -71,8 +74,6 @@ int main() {
         gDeltaTime = gCurrentFrame - gLastFrame;
         gLastFrame = gCurrentFrame;
 
-        // ProcessInput(gDeltaTime);
-
         gCamera.mPollControlInputs(SCR_WIDTH, SCR_HEIGHT, gDeltaTime);
 
         gApp.mPollToggleWireframe();
@@ -84,10 +85,12 @@ int main() {
         // CALCULATE TIME IN SECONDS
         float time = float(SDL_GetTicks64()) * 0.001f;
 
-        /* ---==========================================--- */
-        // REFACTOR :: Wrap This Into the General Draw Lib? //
-        /* ---==========================================--- */
+        ////////...
+        ////...
         // GOING 3D
+        ////...
+        ////////...
+
         glm::mat4 model = glm::mat4(1.0f);
         glm::mat4 view = gCamera.mGetViewMatrix();
         glm::mat4 projection = glm::mat4(1.0f);
@@ -112,7 +115,6 @@ int main() {
         ////...
         ////////...
 
-
         wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
 
@@ -126,6 +128,7 @@ int main() {
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         mDrawMesh3DPrimitive(&Cube, myShader.mShaderProgram);
+        
         SDL_GL_SwapWindow(gApp.mGraphicsApplicationWindow);
     }
 

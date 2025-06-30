@@ -11,13 +11,13 @@
 // Camera Constructor :: Where Camera is Initially Placed in World
 Camera::Camera() {
     // Assume we are placed at the origin.
-    mPosition                  = glm::vec3(0.0f, 0.0f,  3.0f);
+    mPosition               = glm::vec3(0.0f, 0.0f,  3.0f);
     // Assume we are looking out into the world along the negative Z-Axis.
-    mViewDirection                = glm::vec3(0.0f, 0.0f, -1.0f);
+    mViewDirection          = glm::vec3(0.0f, 0.0f, -1.0f);
     // Assume Up/Down is always perfectly aligned along the Y-Axis.
-    mUpVector                   = glm::vec3(0.0f, 1.0f,  0.0f);
+    mUpVector               = glm::vec3(0.0f, 1.0f,  0.0f);
     // Assume strafing occurs along the X-Axis only.
-    mStrafeDirection      = glm::vec3(1.0f,  0.0f, -1.0f);
+    mStrafeDirection        = glm::vec3(1.0f,  0.0f, -1.0f);
 }
 
 glm::mat4 Camera::mGetViewMatrix() const{
@@ -33,7 +33,7 @@ void Camera::mMouseLook(int mouseX, int mouseY) {
     }
 
     // 0.1f Multiplication slows down is basically analagous to "Mouse Sensitivity"
-    glm::vec2 mouseDelta = -((mOldMousePosition - currentMouse)*0.1f);
+    glm::vec2 mouseDelta = -((mOldMousePosition - currentMouse) * 0.1f);
 
     // Handle Looking along the X-Axis, with free 360-degree rotation.
     mViewDirection = glm::rotateY(mViewDirection, glm::radians(mouseDelta.x));
@@ -59,7 +59,6 @@ void Camera::mPrintStrafeDirection() {
         mStrafeDirection.y << ", " << 
         mStrafeDirection.z << ", " << std::endl; 
 }
-
 
 void Camera::mPollControlInputs(GLuint SCR_WIDTH, GLuint SCR_HEIGHT, GLfloat deltaTime) {
 
@@ -121,12 +120,6 @@ void Camera::mPollControlInputs(GLuint SCR_WIDTH, GLuint SCR_HEIGHT, GLfloat del
         mLookLeft(speed);
     }
 }
-
-
-
-
-
-
 
 // WASD Functions
 void Camera::mMoveForward(float speed) {
