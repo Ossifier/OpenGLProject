@@ -51,6 +51,8 @@ int main() {
 
     glEnable(GL_DEPTH_TEST);
 
+    Mesh3DPrimitive Triangle(MESH3D_TRIANGLE, true, true);
+    Mesh3DPrimitive Quad(MESH3D_QUAD, true, true);
     Mesh3DPrimitive Pyramid(MESH3D_PYRAMID, true, true);
     Mesh3DPrimitive Cube(MESH3D_CUBE, true, true);
 
@@ -64,6 +66,8 @@ int main() {
     glUniform1i(glGetUniformLocation(myShader.mShaderProgram, "texture1"), 0);
     glUniform1i(glGetUniformLocation(myShader.mShaderProgram, "texture2"), 1);
 
+    mVertexSpecMesh3DPrimitive(&Triangle);
+    mVertexSpecMesh3DPrimitive(&Quad);
     mVertexSpecMesh3DPrimitive(&Pyramid);
     mVertexSpecMesh3DPrimitive(&Cube);
 
@@ -113,9 +117,44 @@ int main() {
 
         ////////...
         ////...
-        //... PREP & DRAW CUBE -- Optional For Visualizing
+        //... PREP & DRAW TRIANGLE, QUAD, PYRAMID & CUBE -- Optional For Visualizing
+        //... SPEED OF ANIMATIONS -- Can be defined in the Animation 
         ////...
         ////////...
+
+        // --- TRIANGLE
+
+        wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -3.0f)); 
+
+        model = mSpinContinuous(model, time, 2.0f);
+        model = mBobContinuous(model, time, 4.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 2.5f);
+        glBindVertexArray(Triangle.mVAO);
+        
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        mDrawMesh3DPrimitive(&Triangle, myShader.mShaderProgram);
+
+        // --- QUAD
+
+        containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -3.0f)); 
+
+        model = mSpinContinuous(model, time, 3.0f);
+        model = mBobContinuous(model, time, 5.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 5.0f);
+        glBindVertexArray(Quad.mVAO);
+        
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        mDrawMesh3DPrimitive(&Quad, myShader.mShaderProgram);
+
+        // --- PYRAMID
 
         wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
@@ -124,29 +163,28 @@ int main() {
         model = glm::translate(model, glm::vec3(1.0f, 0.0f, -3.0f)); 
 
         model = mSpinContinuous(model, time, 4.0f);
-        model = mBobContinuous(model, time, 8.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 12.5f);
-        glBindVertexArray(Cube.mVAO);
-        
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        mDrawMesh3DPrimitive(&Cube, myShader.mShaderProgram);
-        
-
-
-
-        wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
-        awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
-
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -3.0f)); 
-
-        model = mSpinContinuous(model, time, 6.0f);
-        model = mBobContinuous(model, time, 8.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 12.5f);
+        model = mBobContinuous(model, time, 6.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 7.5f);
         glBindVertexArray(Pyramid.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         mDrawMesh3DPrimitive(&Pyramid, myShader.mShaderProgram);
+
+        // --- CUBE
+
+        containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(3.0f, 0.0f, -3.0f)); 
+
+        model = mSpinContinuous(model, time, 5.0f);
+        model = mBobContinuous(model, time, 7.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 10.0f);
+        glBindVertexArray(Cube.mVAO);
+        
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        mDrawMesh3DPrimitive(&Cube, myShader.mShaderProgram);
 
 
 
