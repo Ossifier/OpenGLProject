@@ -51,6 +51,7 @@ int main() {
 
     glEnable(GL_DEPTH_TEST);
 
+    Mesh3DPrimitive Pyramid(MESH3D_PYRAMID, true, true);
     Mesh3DPrimitive Cube(MESH3D_CUBE, true, true);
 
     Texture2D containerTexture("assets/textures/container.jpg");
@@ -63,6 +64,7 @@ int main() {
     glUniform1i(glGetUniformLocation(myShader.mShaderProgram, "texture1"), 0);
     glUniform1i(glGetUniformLocation(myShader.mShaderProgram, "texture2"), 1);
 
+    mVertexSpecMesh3DPrimitive(&Pyramid);
     mVertexSpecMesh3DPrimitive(&Cube);
 
     // Main Loop
@@ -119,7 +121,7 @@ int main() {
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f)); 
+        model = glm::translate(model, glm::vec3(1.0f, 0.0f, -3.0f)); 
 
         model = mSpinContinuous(model, time, 4.0f);
         model = mBobContinuous(model, time, 8.0f);
@@ -129,6 +131,25 @@ int main() {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         mDrawMesh3DPrimitive(&Cube, myShader.mShaderProgram);
         
+
+
+
+        wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -3.0f)); 
+
+        model = mSpinContinuous(model, time, 6.0f);
+        model = mBobContinuous(model, time, 8.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 12.5f);
+        glBindVertexArray(Pyramid.mVAO);
+        
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        mDrawMesh3DPrimitive(&Pyramid, myShader.mShaderProgram);
+
+
+
         SDL_GL_SwapWindow(gApp.mGraphicsApplicationWindow);
     }
 
