@@ -131,8 +131,8 @@ int main() {
         model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -3.0f)); 
 
         model = mSpinContinuous(model, time, 2.0f);
-        model = mBobContinuous(model, time, 4.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 2.5f);
+        model = mBobContinuous(model, time, 6.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 5.0f);
         glBindVertexArray(Triangle.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -147,8 +147,8 @@ int main() {
         model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -3.0f)); 
 
         model = mSpinContinuous(model, time, 3.0f);
-        model = mBobContinuous(model, time, 5.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 5.0f);
+        model = mBobContinuous(model, time, 7.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 7.5f);
         glBindVertexArray(Quad.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -163,8 +163,8 @@ int main() {
         model = glm::translate(model, glm::vec3(1.0f, 0.0f, -3.0f)); 
 
         model = mSpinContinuous(model, time, 4.0f);
-        model = mBobContinuous(model, time, 6.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 7.5f);
+        model = mBobContinuous(model, time, 8.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 10.0f);
         glBindVertexArray(Pyramid.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -179,8 +179,8 @@ int main() {
         model = glm::translate(model, glm::vec3(3.0f, 0.0f, -3.0f)); 
 
         model = mSpinContinuous(model, time, 5.0f);
-        model = mBobContinuous(model, time, 7.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 10.0f);
+        model = mBobContinuous(model, time, 9.0f);
+        model = mWobbleContinuous(model, time, 0.1f, 12.5f);
         glBindVertexArray(Cube.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
