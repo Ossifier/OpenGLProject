@@ -4,7 +4,7 @@ This file to be populated at another time...
 
 Current To-Dos:
 
-0. Work out how to build a Sphere mesh in your code. Use the Songho.ca website as a guide.
+0. Work out how to build a Sphere mesh in your code. Use the Song Ho Ahn's website as a guide.
 1. Refactor Mesh3DPrimitive files into their own individual class .hpp and .cpp files.
 2. Work out funny business with the Camera Object, fix the angle up/down look so that the calculation for the view projection is equal.
 3. Build different kinds of Cameras that you can select. Flyby, traditional FPS, other kinds as they come to mind?
