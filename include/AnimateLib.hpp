@@ -15,9 +15,9 @@
 //////////...
 
 
-glm::mat4 mBobContinuous(glm::mat4 model, float time, float speed);
-glm::mat4 mSpinContinuous(glm::mat4 model, float time, float speed);
-glm::mat4 mWobbleContinuous(glm::mat4 model, float time, float pitch, float speed);
+glm::mat4 mBob(glm::mat4 model, float time, float speed);
+glm::mat4 mSpin(glm::mat4 model, float time, float speed);
+glm::mat4 mWobble(glm::mat4 model, float time, float pitch, float speed);
 
 //////////...
 /////...
@@ -28,5 +28,9 @@ glm::mat4 mWobbleContinuous(glm::mat4 model, float time, float pitch, float spee
 // glm::mat4 mBobDecay();
 // glm::mat4 mSpinDecay();
 // glm::mat4 mWobbleDecay();
+
+// --- TEST DECAY FUNCTIONS -- //
+
+void mTestDecay(float startSpeed, float decaySpeed);
 
 #endif

@@ -74,7 +74,7 @@ int main() {
     // Main Loop
     while(!gApp.mQuit) {
 
-        Uint64 start = SDL_GetPerformanceCounter();
+        Uint64 startTime = SDL_GetPerformanceCounter();
 
         gCurrentFrame = SDL_GetTicks64();
         gDeltaTime = gCurrentFrame - gLastFrame;
@@ -130,9 +130,9 @@ int main() {
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -3.0f)); 
 
-        model = mSpinContinuous(model, time, 2.0f);
-        model = mBobContinuous(model, time, 6.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 5.0f);
+        model = mSpin(model, time, 2.0f);
+        model = mBob(model, time, 6.0f);
+        model = mWobble(model, time, 0.1f, 5.0f);
         glBindVertexArray(Triangle.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -146,9 +146,9 @@ int main() {
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -3.0f)); 
 
-        model = mSpinContinuous(model, time, 3.0f);
-        model = mBobContinuous(model, time, 7.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 7.5f);
+        model = mSpin(model, time, 3.0f);
+        model = mBob(model, time, 7.0f);
+        model = mWobble(model, time, 0.1f, 7.5f);
         glBindVertexArray(Quad.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -162,9 +162,9 @@ int main() {
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(1.0f, 0.0f, -3.0f)); 
 
-        model = mSpinContinuous(model, time, 4.0f);
-        model = mBobContinuous(model, time, 8.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 10.0f);
+        model = mSpin(model, time, 4.0f);
+        model = mBob(model, time, 8.0f);
+        model = mWobble(model, time, 0.1f, 10.0f);
         glBindVertexArray(Pyramid.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -178,17 +178,24 @@ int main() {
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(3.0f, 0.0f, -3.0f)); 
 
-        model = mSpinContinuous(model, time, 5.0f);
-        model = mBobContinuous(model, time, 9.0f);
-        model = mWobbleContinuous(model, time, 0.1f, 12.5f);
+        model = mSpin(model, time, 5.0f);
+        model = mBob(model, time, 9.0f);
+        model = mWobble(model, time, 0.1f, 12.5f);
         glBindVertexArray(Cube.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         mDrawMesh3DPrimitive(&Cube, myShader.mShaderProgram);
 
-
+        // -- TEST ANIMATION DECAY FUNCTIONS
+        // // mTestDecay(1000.0f, 2.0f);
+        // std::cout << "gCurrentFrame: " << gCurrentFrame << std::endl;
+        // std::cout << "gDeltaTime: " << gDeltaTime << std::endl;
+        // std::cout << "gLastFrame: " << gLastFrame << std::endl;
+        // std::cout << "time: " << time << std::endl;
 
         SDL_GL_SwapWindow(gApp.mGraphicsApplicationWindow);
+
+        gApp.mGetFPS(startTime);
     }
 
     return 0;
