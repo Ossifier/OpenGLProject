@@ -18,9 +18,9 @@ class Shader{
 
     private:
         // Internal Member Functions
-        std::string LoadShaderFromFile(const std::string& filename);
-        GLuint CompileShader(GLuint type, const std::string& source);
-        GLuint LinkShaders(GLuint shader1, GLuint shader2);
+        std::string mLoadShaderFromFile(const std::string& filename);
+        GLuint mCompileShader(GLuint type, const std::string& source);
+        GLuint mLinkShaders(GLuint shader1, GLuint shader2);
 };
 
 #endif

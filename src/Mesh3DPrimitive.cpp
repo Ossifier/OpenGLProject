@@ -350,6 +350,58 @@ Mesh3DPrimitive::Mesh3DPrimitive(Shape shapeType, bool isColored, bool isTexture
                 mFullVertStride += 2;
             }
     }
+
+    // VERTEX SPECIFICATION
+    std::vector<GLfloat> verts = mVertices;
+    std::vector<GLuint> inds = mIndices;
+
+    // if (inds.size() == 0) {
+    //     std::cout << "Indices = No" << std::endl;
+    // } else { 
+    //     std::cout << "Indices = Yes" << std::endl;
+    // }
+
+    GLuint FullVSL  = mFullVertStride;
+    GLuint VSL      = mVertStrideLength;
+    GLuint CSL      = mColorStrideLength;
+    GLuint TCSL     = mTexCoordStrideLength;
+
+    // std::cout << "mFullVertStride: " << FullVSL << std::endl;
+    // std::cout << "mVertStrideLength: " << VSL << std::endl;
+    // std::cout << "mColorStrideLength: " << CSL << std::endl;
+    // std::cout << "mTexCoordStrideLength: " << TCSL << std::endl;
+
+    // Generate VAO, VBO, EBO
+    glGenVertexArrays(1, &mVAO);
+    glGenBuffers(1, &mVBO);
+    glGenBuffers(1, &mEBO);
+
+    // BIND OUR OBJECTS TOGETHER
+    glBindVertexArray(mVAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, mVBO);
+    glBufferData(GL_ARRAY_BUFFER, verts.size() * sizeof(GLfloat), verts.data(), GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mEBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, inds.size() * sizeof(GLuint), inds.data(), GL_STATIC_DRAW);
+
+    // Position attributes
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, FullVSL * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // Color attributes
+    if (mIsColored) {
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, FullVSL * sizeof(GLfloat), (void*)((VSL) * sizeof(GLfloat)));
+        glEnableVertexAttribArray(1);
+    }
+    // Texture coord attributes
+    if (mIsTextured) {
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, mFullVertStride * sizeof(GLfloat), (void*)((VSL + CSL) * sizeof(GLfloat)));
+        glEnableVertexAttribArray(2);
+    }
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 }
 
 std::vector<GLfloat> Mesh3DPrimitive::mPopulateAdditionalVertexData(

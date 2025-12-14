@@ -6,20 +6,20 @@
 
 Shader::Shader(const std::string& vertShaderPath, const std::string& fragShaderPath) {
 
-    std::string vertShaderSource = LoadShaderFromFile(vertShaderPath);
-    std::string fragShaderSource = LoadShaderFromFile(fragShaderPath);
+    std::string vertShaderSource = mLoadShaderFromFile(vertShaderPath);
+    std::string fragShaderSource = mLoadShaderFromFile(fragShaderPath);
 
-    GLuint vertShader = CompileShader(GL_VERTEX_SHADER, vertShaderSource);
-    GLuint fragShader = CompileShader(GL_FRAGMENT_SHADER, fragShaderSource);
+    GLuint vertShader = mCompileShader(GL_VERTEX_SHADER, vertShaderSource);
+    GLuint fragShader = mCompileShader(GL_FRAGMENT_SHADER, fragShaderSource);
 
-    mShaderProgram = LinkShaders(vertShader, fragShader);
+    mShaderProgram = mLinkShaders(vertShader, fragShader);
 
     glDeleteShader(vertShader);
     glDeleteShader(fragShader);
 
 }
 
-std::string Shader::LoadShaderFromFile(const std::string& filename) {
+std::string Shader::mLoadShaderFromFile(const std::string& filename) {
     std::string result = "";
     std::string line = "";
     std::ifstream myFile(filename.c_str());
@@ -34,7 +34,7 @@ std::string Shader::LoadShaderFromFile(const std::string& filename) {
     return result;
 }
 
-GLuint Shader::CompileShader(GLuint type, const std::string& source) {
+GLuint Shader::mCompileShader(GLuint type, const std::string& source) {
     GLuint shaderObject;
 
     if (type == GL_VERTEX_SHADER) {
@@ -70,7 +70,7 @@ GLuint Shader::CompileShader(GLuint type, const std::string& source) {
     return shaderObject;
 }
 
-GLuint Shader::LinkShaders(GLuint shader1, GLuint shader2) {
+GLuint Shader::mLinkShaders(GLuint shader1, GLuint shader2) {
     GLuint programObject = glCreateProgram();
 
     glAttachShader(programObject, shader1);

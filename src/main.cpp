@@ -5,6 +5,10 @@
 
 // Include Mesh3D Primitive Library (Includes Draw Functions)
 #include "Mesh3DPrimitive.hpp"
+#include "Mesh3DTriangle.hpp"
+#include "Mesh3DQuad.hpp"
+#include "Mesh3DPyramid.hpp"
+#include "Mesh3DCube.hpp"
 
 // Include Self-Authored Libraries
 #include "DrawLib.hpp"
@@ -21,8 +25,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-
 
 ////////...
 ////...
@@ -51,25 +53,31 @@ int main() {
 
     glEnable(GL_DEPTH_TEST);
 
-    Mesh3DPrimitive Triangle(MESH3D_TRIANGLE, true, true);
-    Mesh3DPrimitive Quad(MESH3D_QUAD, true, true);
-    Mesh3DPrimitive Pyramid(MESH3D_PYRAMID, true, true);
-    Mesh3DPrimitive Cube(MESH3D_CUBE, true, true);
+    Shader myShader("shaders/vert.glsl", "shaders/frag_mix.glsl");
 
     Texture2D containerTexture("assets/textures/container.jpg");
     Texture2D wallTexture("assets/textures/wall.jpg");
     Texture2D awesomefaceTexture("assets/textures/awesomeface.png");
 
-    Shader myShader("shaders/vert.glsl", "shaders/frag_mix.glsl");
+    Mesh3DPrimitive Triangle(MESH3D_TRIANGLE, true, true);
+    Mesh3DPrimitive Quad(MESH3D_QUAD, true, true);
+    Mesh3DPrimitive Pyramid(MESH3D_PYRAMID, true, true);
+    Mesh3DPrimitive Cube(MESH3D_CUBE, true, true);
+
+    Mesh3DTriangle TriangleNew(true, true);
+    Mesh3DQuad QuadNew(true, true);
+    Mesh3DPyramid PyramidNew(true, true);
+    Mesh3DCube CubeNew(true, true);
 
     glUseProgram(myShader.mShaderProgram);
     glUniform1i(glGetUniformLocation(myShader.mShaderProgram, "texture1"), 0);
     glUniform1i(glGetUniformLocation(myShader.mShaderProgram, "texture2"), 1);
 
-    mVertexSpecMesh3DPrimitive(&Triangle);
-    mVertexSpecMesh3DPrimitive(&Quad);
-    mVertexSpecMesh3DPrimitive(&Pyramid);
-    mVertexSpecMesh3DPrimitive(&Cube);
+    /* NO LONGER NEEDED -- Built into Constructor for all */
+    // mVertexSpecMesh3DPrimitive(&Triangle);
+    // mVertexSpecMesh3DPrimitive(&Quad);
+    // mVertexSpecMesh3DPrimitive(&Pyramid);
+    // mVertexSpecMesh3DPrimitive(&Cube);
 
     // Main Loop
     while(!gApp.mQuit) {
@@ -113,6 +121,75 @@ int main() {
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, &projection[0][0]);
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+
+        // --- TRIANGLE :: New Mesh3DTriangle Class
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -10.0f)); 
+
+        model = mSpin(model, time, 2.0f);
+        model = mBob(model, time, 6.0f);
+        model = mWobble(model, time, 0.1f, 5.0f);
+
+        wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
+
+        glBindVertexArray(TriangleNew.mVAO);
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+        TriangleNew.mDrawMesh3D(myShader.mShaderProgram);
+
+        // --- Quad :: New Mesh3DQuad Class
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-2.0f, 0.0f, -10.0f)); 
+
+        model = mSpin(model, time, 5.0f);
+        model = mBob(model, time, 9.0f);
+        model = mWobble(model, time, 0.1f, 12.5f);
+
+        containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
+
+        glBindVertexArray(QuadNew.mVAO);
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+        QuadNew.mDrawMesh3D(myShader.mShaderProgram);
+
+        // --- Pyramid :: New Mesh3DPyramid Class
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, -10.0f)); 
+
+        model = mSpin(model, time, 4.0f);
+        model = mBob(model, time, 8.0f);
+        model = mWobble(model, time, 0.1f, 10.0f);
+
+        wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
+
+        glBindVertexArray(PyramidNew.mVAO);
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+        PyramidNew.mDrawMesh3D(myShader.mShaderProgram);
+
+        // --- Cube :: New Mesh3DCube Class
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(6.0f, 0.0f, -10.0f)); 
+
+        model = mSpin(model, time, 4.0f);
+        model = mBob(model, time, 8.0f);
+        model = mWobble(model, time, 0.1f, 10.0f);
+
+        containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
+
+        glBindVertexArray(CubeNew.mVAO);
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+        CubeNew.mDrawMesh3D(myShader.mShaderProgram);
+
 
 
         ////////...
@@ -186,17 +263,9 @@ int main() {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         mDrawMesh3DPrimitive(&Cube, myShader.mShaderProgram);
 
-        // -- TEST ANIMATION DECAY FUNCTIONS
-        // // mTestDecay(1000.0f, 2.0f);
-        // std::cout << "gCurrentFrame: " << gCurrentFrame << std::endl;
-        // std::cout << "gDeltaTime: " << gDeltaTime << std::endl;
-        // std::cout << "gLastFrame: " << gLastFrame << std::endl;
-        // std::cout << "time: " << time << std::endl;
-
         SDL_GL_SwapWindow(gApp.mGraphicsApplicationWindow);
 
-        gApp.mGetFPS(startTime);
+        // gApp.mGetFPS(startTime);
     }
-
     return 0;
 }

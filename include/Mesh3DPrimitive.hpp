@@ -6,10 +6,14 @@
 #include <iostream>
 #include <vector>
 
+#include "Shader.hpp"
+
 enum Shape { MESH3D_TRIANGLE, MESH3D_QUAD, MESH3D_PYRAMID, MESH3D_CUBE };
 
 struct Mesh3DPrimitive {
+
         Mesh3DPrimitive(Shape shapeType, bool isColored, bool isTextured);
+        
         std::vector<GLfloat> mVertices{};
         std::vector<GLfloat> mColorCoords{};
         std::vector<GLfloat> mTexCoords{};
