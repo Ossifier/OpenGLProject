@@ -1,4 +1,3 @@
-
 #include "Mesh3DCube.hpp"
 
 Mesh3DCube::Mesh3DCube(bool isColored, bool isTextured) {

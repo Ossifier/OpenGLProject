@@ -1,4 +1,3 @@
-
 #include "Mesh3DQuad.hpp"
 
 Mesh3DQuad::Mesh3DQuad(bool isColored, bool isTextured) {

@@ -1,4 +1,3 @@
-
 #include "Mesh3DTriangle.hpp"
 
 Mesh3DTriangle::Mesh3DTriangle(bool isColored, bool isTextured) {

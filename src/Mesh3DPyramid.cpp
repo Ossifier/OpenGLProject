@@ -1,4 +1,3 @@
-
 #include "Mesh3DPyramid.hpp"
 
 Mesh3DPyramid::Mesh3DPyramid(bool isColored, bool isTextured) {
