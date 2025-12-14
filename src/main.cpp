@@ -122,7 +122,14 @@ int main() {
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, &projection[0][0]);
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
-        // --- TRIANGLE :: New Mesh3DTriangle Class
+        ////////...
+        ////...
+        //... PREP & DRAW TRIANGLE, QUAD, PYRAMID & CUBE -- Optional For Visualizing
+        //... SPEED OF ANIMATIONS -- Can be defined in the Animation 
+        ////...
+        ////////...
+    
+        // --- TRINGLE :: New Mesh3DTriangle Class
 
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -10.0f)); 
@@ -139,7 +146,7 @@ int main() {
 
         TriangleNew.mDrawMesh3D(myShader.mShaderProgram);
 
-        // --- Quad :: New Mesh3DQuad Class
+        // --- QUAD :: New Mesh3DQuad Class
 
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-2.0f, 0.0f, -10.0f)); 
@@ -156,7 +163,7 @@ int main() {
 
         QuadNew.mDrawMesh3D(myShader.mShaderProgram);
 
-        // --- Pyramid :: New Mesh3DPyramid Class
+        // --- PYRAMID :: New Mesh3DPyramid Class
 
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(2.0f, 0.0f, -10.0f)); 
@@ -173,7 +180,7 @@ int main() {
 
         PyramidNew.mDrawMesh3D(myShader.mShaderProgram);
 
-        // --- Cube :: New Mesh3DCube Class
+        // --- CUBE :: New Mesh3DCube Class
 
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(6.0f, 0.0f, -10.0f)); 
@@ -189,8 +196,6 @@ int main() {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
         CubeNew.mDrawMesh3D(myShader.mShaderProgram);
-
-
 
         ////////...
         ////...
