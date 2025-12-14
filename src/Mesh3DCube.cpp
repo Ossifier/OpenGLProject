@@ -1,9 +1,6 @@
 
 #include "Mesh3DCube.hpp"
 
-///////...
-// Programmatic Constructor (Based on supplied Shape ENUM)
-///////...
 Mesh3DCube::Mesh3DCube(bool isColored, bool isTextured) {
 
     mVertStrideLength = 3;

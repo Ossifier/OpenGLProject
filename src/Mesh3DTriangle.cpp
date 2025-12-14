@@ -1,9 +1,6 @@
 
 #include "Mesh3DTriangle.hpp"
 
-///////...
-// Programmatic Constructor (Based on supplied Shape ENUM)
-///////...
 Mesh3DTriangle::Mesh3DTriangle(bool isColored, bool isTextured) {
 
     mVertStrideLength = 3;

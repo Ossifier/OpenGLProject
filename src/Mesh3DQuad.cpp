@@ -1,9 +1,6 @@
 
 #include "Mesh3DQuad.hpp"
 
-///////...
-// Programmatic Constructor (Based on supplied Shape ENUM)
-///////...
 Mesh3DQuad::Mesh3DQuad(bool isColored, bool isTextured) {
 
     mVertStrideLength = 3;

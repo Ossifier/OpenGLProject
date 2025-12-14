@@ -1,9 +1,6 @@
 
 #include "Mesh3DPyramid.hpp"
 
-///////...
-// Programmatic Constructor (Based on supplied Shape ENUM)
-///////...
 Mesh3DPyramid::Mesh3DPyramid(bool isColored, bool isTextured) {
 
     mVertStrideLength = 3;
