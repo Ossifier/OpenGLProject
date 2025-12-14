@@ -12,9 +12,6 @@
 #include <sstream>
 #include <fstream>
 
-#include "Shader.hpp"
-#include "Texture2D.hpp"
-
 struct Mesh3DCube {
 
     // Constructor & Destructor -- Triangle
