@@ -3,7 +3,7 @@
 #include "Shader.hpp"
 #include "Texture2D.hpp"
 
-// Include Mesh3D Primitive Library (Includes Draw Functions)
+// Include Mesh3D Primitive Library
 #include "Mesh3DFlex.hpp"
 #include "Mesh3DTriangle.hpp"
 #include "Mesh3DQuad.hpp"
@@ -132,7 +132,7 @@ int main() {
         // --- TRINGLE :: New Mesh3DTriangle Class
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -10.0f)); 
+        model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -15.0f)); 
 
         model = mSpin(model, time, 2.0f);
         model = mBob(model, time, 6.0f);
@@ -149,7 +149,7 @@ int main() {
         // --- QUAD :: New Mesh3DQuad Class
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-2.0f, 0.0f, -10.0f)); 
+        model = glm::translate(model, glm::vec3(-2.0f, 0.0f, -15.0f)); 
 
         model = mSpin(model, time, 5.0f);
         model = mBob(model, time, 9.0f);
@@ -166,7 +166,7 @@ int main() {
         // --- PYRAMID :: New Mesh3DPyramid Class
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(2.0f, 0.0f, -10.0f)); 
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, -15.0f)); 
 
         model = mSpin(model, time, 4.0f);
         model = mBob(model, time, 8.0f);
@@ -183,7 +183,7 @@ int main() {
         // --- CUBE :: New Mesh3DCube Class
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(6.0f, 0.0f, -10.0f)); 
+        model = glm::translate(model, glm::vec3(6.0f, 0.0f, -15.0f)); 
 
         model = mSpin(model, time, 4.0f);
         model = mBob(model, time, 8.0f);
@@ -206,11 +206,11 @@ int main() {
 
         // --- TRIANGLE :: Old Mesh3DFlex 
 
-        wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -3.0f)); 
+        model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -10.0f)); 
 
         model = mSpin(model, time, 2.0f);
         model = mBob(model, time, 6.0f);
@@ -222,15 +222,15 @@ int main() {
 
         // --- QUAD :: Old Mesh3DFlex 
 
-        containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -3.0f)); 
+        model = glm::translate(model, glm::vec3(-2.0f, 0.0f, -10.0f)); 
 
-        model = mSpin(model, time, 3.0f);
-        model = mBob(model, time, 7.0f);
-        model = mWobble(model, time, 0.1f, 7.5f);
+        model = mSpin(model, time, 5.0f);
+        model = mBob(model, time, 9.0f);
+        model = mWobble(model, time, 0.1f, 12.5f);
         glBindVertexArray(Quad.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -238,11 +238,11 @@ int main() {
 
         // --- PYRAMID :: Old Mesh3DFlex 
 
-        wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(1.0f, 0.0f, -3.0f)); 
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, -10.0f)); 
 
         model = mSpin(model, time, 4.0f);
         model = mBob(model, time, 8.0f);
@@ -254,15 +254,15 @@ int main() {
 
         // --- CUBE :: Old Mesh3DFlex 
 
-        containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
+        wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
 
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(3.0f, 0.0f, -3.0f)); 
+        model = glm::translate(model, glm::vec3(6.0f, 0.0f, -10.0f)); 
 
-        model = mSpin(model, time, 5.0f);
-        model = mBob(model, time, 9.0f);
-        model = mWobble(model, time, 0.1f, 12.5f);
+        model = mSpin(model, time, 4.0f);
+        model = mBob(model, time, 8.0f);
+        model = mWobble(model, time, 0.1f, 10.0f);
         glBindVertexArray(Cube.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));

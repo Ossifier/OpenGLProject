@@ -23,9 +23,9 @@ Mesh3DFlex::Mesh3DFlex(Shape shapeType, bool isColored, bool isTextured) {
             mNumVerts = 3;
             mNumFaces = 1;
             mVertices = { 
-                 0.0f,  0.5f,  0.0f,    // top
-                -0.5f, -0.5f,  0.0f,    // bottom left
-                 0.5f, -0.5f,  0.0f     // bottom right
+                 0.0f,  1.0f,  0.0f,    // top
+                -1.0f, -1.0f,  0.0f,    // bottom left
+                 1.0f, -1.0f,  0.0f     // bottom right
             };
 
             if (isColored) {
@@ -57,10 +57,10 @@ Mesh3DFlex::Mesh3DFlex(Shape shapeType, bool isColored, bool isTextured) {
             mNumVerts = 4;
             mNumFaces = 1;
             mVertices = { 
-                -0.5f,  0.5f,  0.0f,    // top left
-                 0.5f,  0.5f,  0.0f,    // top right
-                -0.5f, -0.5f,  0.0f,    // bottom left
-                 0.5f, -0.5f,  0.0f     // bottom right
+                -1.0f,  1.0f,  0.0f,    // top left
+                 1.0f,  1.0f,  0.0f,    // top right
+                -1.0f, -1.0f,  0.0f,    // bottom left
+                 1.0f, -1.0f,  0.0f     // bottom right
             };
 
             mIndices = {
@@ -94,46 +94,154 @@ Mesh3DFlex::Mesh3DFlex(Shape shapeType, bool isColored, bool isTextured) {
 
             break;
 
+        case MESH3D_PYRAMID:
+ 
+            mNumVerts = 16;
+            mNumFaces = 5;
+            mVertices = { 
+                /* Bottom Face */
+                -1.0f, -1.0f, -1.0f,       // top left 
+                 1.0f, -1.0f, -1.0f,       // top right
+                -1.0f, -1.0f,  1.0f,       // bottom left
+                 1.0f, -1.0f,  1.0f,       // bottom right
+
+                /* Back Triangle */
+                 0.0f,  1.0f,  0.0f,        // top
+                -1.0f, -1.0f, -1.0f,        // bottom left
+                 1.0f, -1.0f, -1.0f,        // bottom right
+
+                /* Left Triangle */
+                 0.0f,  1.0f,  0.0f,        // top
+                -1.0f, -1.0f,  1.0f,        // bottom left
+                -1.0f, -1.0f, -1.0f,        // bottom right
+
+                /* Right Triangle */
+                 0.0f,  1.0f,  0.0f,        // top
+                 1.0f, -1.0f, -1.0f,        // bottom left
+                 1.0f, -1.0f,  1.0f,         // bottom right
+
+                /* Front Triangle */
+                 0.0f,  1.0f,  0.0f,        // top
+                -1.0f, -1.0f,  1.0f,        // bottom left
+                 1.0f, -1.0f,  1.0f,         // bottom right
+            };
+
+            mIndices = {
+                // Base Quad
+                0, 1, 3,
+                3, 2, 0,
+
+                // Face 2
+                4, 5, 6,
+
+                // Face 3
+                7, 8, 9,
+
+                // Face 4
+                10, 11, 12,
+
+                // Face 5
+                13, 14, 15
+            };
+
+            if (isColored) {
+                mColorCoords = {
+                    1.0f, 0.0f, 1.0f,   // top left
+                    1.0f, 0.0f, 0.0f,   // top right
+                    0.0f, 1.0f, 0.0f,   // bottom left
+                    0.0f, 0.0f, 1.0f,   // bottom right
+
+                    1.0f, 1.0f, 0.0f,   // top
+                    1.0f, 0.0f, 1.0f,   // bottom left
+                    1.0f, 0.0f, 0.0f,   // bottom right
+
+                    1.0f, 1.0f, 0.0f,   // top
+                    0.0f, 1.0f, 0.0f,   // bottom left
+                    1.0f, 0.0f, 1.0f,   // bottom right
+
+                    1.0f, 1.0f, 0.0f,   // top
+                    1.0f, 0.0f, 0.0f,   // bottom left
+                    0.0f, 0.0f, 1.0f,   // bottom right
+
+                    1.0f, 1.0f, 0.0f,   // top
+                    0.0f, 1.0f, 0.0f,   // bottom left
+                    0.0f, 0.0f, 1.0f    // bottom right
+            };
+
+                mVertices = mPopulateAdditionalVertexData(mVertices, mColorCoords, mNumVerts, mFullVertStride, 3);
+                mFullVertStride += 3;
+            }
+
+            if (isTextured) {
+                mTexCoords = {
+                    0.0f, 1.0f, // top left
+                    1.0f, 1.0f, // top right
+                    0.0f, 0.0f, // bottom left
+                    1.0f, 0.0f, // bottom right
+
+                    0.5f, 1.0f, // top
+                    0.0f, 0.0f, // bottom left
+                    1.0f, 0.0f,  // bottom right
+
+                    0.5f, 1.0f, // top
+                    0.0f, 0.0f, // bottom left
+                    1.0f, 0.0f,  // bottom right
+
+                    0.5f, 1.0f, // top
+                    0.0f, 0.0f, // bottom left
+                    1.0f, 0.0f,  // bottom right
+
+                    0.5f, 1.0f, // top
+                    0.0f, 0.0f, // bottom left
+                    1.0f, 0.0f  // bottom right      
+                };
+
+                mVertices = mPopulateAdditionalVertexData(mVertices, mTexCoords, mNumVerts, mFullVertStride, 2);
+                mFullVertStride += 2;
+            }
+
+            break;
+
         case MESH3D_CUBE:
         
             mNumVerts = 24;
             mNumFaces = 6;
             mVertices = { 
                 /* Bottom Face */
-                -0.5f, -0.5f,  0.5f,       // top left 
-                 0.5f, -0.5f,  0.5f,       // top right
-                -0.5f, -0.5f, -0.5f,       // bottom left
-                 0.5f, -0.5f, -0.5f,       // bottom right
+                -1.0f, -1.0f,  1.0f,       // top left 
+                 1.0f, -1.0f,  1.0f,       // top right
+                -1.0f, -1.0f, -1.0f,       // bottom left
+                 1.0f, -1.0f, -1.0f,       // bottom right
 
                 /* Back Face */
-                 0.5f,  0.5f, -0.5f,       // top left 
-                -0.5f,  0.5f, -0.5f,       // top right
-                 0.5f, -0.5f, -0.5f,       // bottom left
-                -0.5f, -0.5f, -0.5f,       // bottom right
+                 1.0f,  1.0f, -1.0f,       // top left 
+                -1.0f,  1.0f, -1.0f,       // top right
+                 1.0f, -1.0f, -1.0f,       // bottom left
+                -1.0f, -1.0f, -1.0f,       // bottom right
 
                 /* Left Face */
-                -0.5f,  0.5f, -0.5f,       // top left 
-                -0.5f,  0.5f,  0.5f,       // top right
-                -0.5f, -0.5f, -0.5f,       // bottom left
-                -0.5f, -0.5f,  0.5f,       // bottom right
+                -1.0f,  1.0f, -1.0f,       // top left 
+                -1.0f,  1.0f,  1.0f,       // top right
+                -1.0f, -1.0f, -1.0f,       // bottom left
+                -1.0f, -1.0f,  1.0f,       // bottom right
 
                 /* Right Face */
-                0.5f,  0.5f,  0.5f,       // top left 
-                0.5f,  0.5f, -0.5f,       // top right
-                0.5f, -0.5f,  0.5f,       // bottom left
-                0.5f, -0.5f, -0.5f,       // bottom right
+                1.0f,  1.0f,  1.0f,       // top left 
+                1.0f,  1.0f, -1.0f,       // top right
+                1.0f, -1.0f,  1.0f,       // bottom left
+                1.0f, -1.0f, -1.0f,       // bottom right
 
                 /* Top Face */
-                -0.5f,  0.5f, -0.5f,       // top left 
-                 0.5f,  0.5f, -0.5f,       // top right
-                -0.5f,  0.5f,  0.5f,       // bottom left
-                 0.5f,  0.5f,  0.5f,       // bottom right
+                -1.0f,  1.0f, -1.0f,       // top left 
+                 1.0f,  1.0f, -1.0f,       // top right
+                -1.0f,  1.0f,  1.0f,       // bottom left
+                 1.0f,  1.0f,  1.0f,       // bottom right
 
                 /* Front Face */
-                -0.5f,  0.5f,  0.5f,       // top left 
-                 0.5f,  0.5f,  0.5f,       // top right
-                -0.5f, -0.5f,  0.5f,       // bottom left
-                 0.5f, -0.5f,  0.5f        // bottom right
+                -1.0f,  1.0f,  1.0f,       // top left 
+                 1.0f,  1.0f,  1.0f,       // top right
+                -1.0f, -1.0f,  1.0f,       // bottom left
+                 1.0f, -1.0f,  1.0f        // bottom right
             };
 
             mIndices = {
@@ -243,112 +351,6 @@ Mesh3DFlex::Mesh3DFlex(Shape shapeType, bool isColored, bool isTextured) {
             }
             
             break;
-
-        case MESH3D_PYRAMID:
- 
-            mNumVerts = 16;
-            mNumFaces = 5;
-            mVertices = { 
-                /* Bottom Face */
-                -0.5f, -0.5f, -0.5f,       // top left 
-                 0.5f, -0.5f, -0.5f,       // top right
-                -0.5f, -0.5f,  0.5f,       // bottom left
-                 0.5f, -0.5f,  0.5f,       // bottom right
-
-                /* Back Triangle */
-                 0.0f,  0.5f,  0.0f,        // top
-                -0.5f, -0.5f, -0.5f,        // bottom left
-                 0.5f, -0.5f, -0.5f,        // bottom right
-
-                /* Left Triangle */
-                 0.0f,  0.5f,  0.0f,        // top
-                -0.5f, -0.5f,  0.5f,        // bottom left
-                -0.5f, -0.5f, -0.5f,        // bottom right
-
-                /* Right Triangle */
-                 0.0f,  0.5f,  0.0f,        // top
-                 0.5f, -0.5f, -0.5f,        // bottom left
-                 0.5f, -0.5f,  0.5f,         // bottom right
-
-                /* Front Triangle */
-                 0.0f,  0.5f,  0.0f,        // top
-                -0.5f, -0.5f,  0.5f,        // bottom left
-                 0.5f, -0.5f,  0.5f,         // bottom right
-            };
-
-            mIndices = {
-                // Base Quad
-                0, 1, 3,
-                3, 2, 0,
-
-                // Face 2
-                4, 5, 6,
-
-                // Face 3
-                7, 8, 9,
-
-                // Face 4
-                10, 11, 12,
-
-                // Face 5
-                13, 14, 15
-            };
-
-            if (isColored) {
-                mColorCoords = {
-                    1.0f, 0.0f, 1.0f,   // top left
-                    1.0f, 0.0f, 0.0f,   // top right
-                    0.0f, 1.0f, 0.0f,   // bottom left
-                    0.0f, 0.0f, 1.0f,   // bottom right
-
-                    1.0f, 1.0f, 0.0f,   // top
-                    1.0f, 0.0f, 1.0f,   // bottom left
-                    1.0f, 0.0f, 0.0f,   // bottom right
-
-                    1.0f, 1.0f, 0.0f,   // top
-                    0.0f, 1.0f, 0.0f,   // bottom left
-                    1.0f, 0.0f, 1.0f,   // bottom right
-
-                    1.0f, 1.0f, 0.0f,   // top
-                    1.0f, 0.0f, 0.0f,   // bottom left
-                    0.0f, 0.0f, 1.0f,   // bottom right
-
-                    1.0f, 1.0f, 0.0f,   // top
-                    0.0f, 1.0f, 0.0f,   // bottom left
-                    0.0f, 0.0f, 1.0f    // bottom right
-            };
-
-                mVertices = mPopulateAdditionalVertexData(mVertices, mColorCoords, mNumVerts, mFullVertStride, 3);
-                mFullVertStride += 3;
-            }
-
-            if (isTextured) {
-                mTexCoords = {
-                    0.0f, 1.0f, // top left
-                    1.0f, 1.0f, // top right
-                    0.0f, 0.0f, // bottom left
-                    1.0f, 0.0f, // bottom right
-
-                    0.5f, 1.0f, // top
-                    0.0f, 0.0f, // bottom left
-                    1.0f, 0.0f,  // bottom right
-
-                    0.5f, 1.0f, // top
-                    0.0f, 0.0f, // bottom left
-                    1.0f, 0.0f,  // bottom right
-
-                    0.5f, 1.0f, // top
-                    0.0f, 0.0f, // bottom left
-                    1.0f, 0.0f,  // bottom right
-
-                    0.5f, 1.0f, // top
-                    0.0f, 0.0f, // bottom left
-                    1.0f, 0.0f  // bottom right      
-                };
-
-                mVertices = mPopulateAdditionalVertexData(mVertices, mTexCoords, mNumVerts, mFullVertStride, 2);
-                mFullVertStride += 2;
-            }
     }
 
     // VERTEX SPECIFICATION
