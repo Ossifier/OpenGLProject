@@ -4,7 +4,7 @@
 #include "Texture2D.hpp"
 
 // Include Mesh3D Primitive Library (Includes Draw Functions)
-#include "Mesh3DPrimitive.hpp"
+#include "Mesh3DFlex.hpp"
 #include "Mesh3DTriangle.hpp"
 #include "Mesh3DQuad.hpp"
 #include "Mesh3DPyramid.hpp"
@@ -59,10 +59,10 @@ int main() {
     Texture2D wallTexture("assets/textures/wall.jpg");
     Texture2D awesomefaceTexture("assets/textures/awesomeface.png");
 
-    Mesh3DPrimitive Triangle(MESH3D_TRIANGLE, true, true);
-    Mesh3DPrimitive Quad(MESH3D_QUAD, true, true);
-    Mesh3DPrimitive Pyramid(MESH3D_PYRAMID, true, true);
-    Mesh3DPrimitive Cube(MESH3D_CUBE, true, true);
+    Mesh3DFlex Triangle(MESH3D_TRIANGLE, true, true);
+    Mesh3DFlex Quad(MESH3D_QUAD, true, true);
+    Mesh3DFlex Pyramid(MESH3D_PYRAMID, true, true);
+    Mesh3DFlex Cube(MESH3D_CUBE, true, true);
 
     Mesh3DTriangle TriangleNew(true, true);
     Mesh3DQuad QuadNew(true, true);
@@ -204,7 +204,7 @@ int main() {
         ////...
         ////////...
 
-        // --- TRIANGLE
+        // --- TRIANGLE :: Old Mesh3DFlex 
 
         wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
@@ -218,9 +218,9 @@ int main() {
         glBindVertexArray(Triangle.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        mDrawMesh3DPrimitive(&Triangle, myShader.mShaderProgram);
+        Triangle.mDrawMesh3D(myShader.mShaderProgram);
 
-        // --- QUAD
+        // --- QUAD :: Old Mesh3DFlex 
 
         containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
@@ -234,9 +234,9 @@ int main() {
         glBindVertexArray(Quad.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        mDrawMesh3DPrimitive(&Quad, myShader.mShaderProgram);
+        Quad.mDrawMesh3D(myShader.mShaderProgram);
 
-        // --- PYRAMID
+        // --- PYRAMID :: Old Mesh3DFlex 
 
         wallTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
@@ -250,9 +250,9 @@ int main() {
         glBindVertexArray(Pyramid.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        mDrawMesh3DPrimitive(&Pyramid, myShader.mShaderProgram);
+        Pyramid.mDrawMesh3D(myShader.mShaderProgram);
 
-        // --- CUBE
+        // --- CUBE :: Old Mesh3DFlex 
 
         containerTexture.mBindTexture(GL_TEXTURE0, GL_TEXTURE_2D);
         awesomefaceTexture.mBindTexture(GL_TEXTURE1, GL_TEXTURE_2D);
@@ -266,7 +266,7 @@ int main() {
         glBindVertexArray(Cube.mVAO);
         
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        mDrawMesh3DPrimitive(&Cube, myShader.mShaderProgram);
+        Cube.mDrawMesh3D(myShader.mShaderProgram);
 
         SDL_GL_SwapWindow(gApp.mGraphicsApplicationWindow);
 

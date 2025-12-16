@@ -112,6 +112,7 @@ struct Mesh3DCube {
     void mPrintVertexData();
     void mPrintIndexData();
 
+    // Draw Functions
     void mDrawMesh3D(GLuint shader);
 };
 

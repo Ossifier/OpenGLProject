@@ -56,6 +56,7 @@ struct Mesh3DTriangle {
     void mPrintVertexData();
     void mPrintIndexData();
 
+    // Draw Functions
     void mDrawMesh3D(GLuint shader);
 };
 
